@@ -23,12 +23,12 @@
 # MIN_ARCHIVES      Minimum number of archives to keep regardless of age, 
 #                   defaults to 4
 
-: ${DB?Please specify a database - DB}
-: ${DB_HOST?Please specify a database host - DB_HOST}
-: ${BACKUP_DIR?Please specify a backup directory - BACKUP_DIR}
-: ${ARCHIVE_DIR?Please specify an archive directory - ARCHIVE_DIR}
-: ${DB_USER?Please specify database user - DB_USER}
-: ${DB_PASS?Please specify a database password - DB_PASS}
+: ${DB?Please specify a database.}
+: ${DB_HOST?Please specify a database host.}
+: ${BACKUP_DIR?Please specify a backup directory.}
+: ${ARCHIVE_DIR?Please specify an archive directory.}
+: ${DB_USER?Please specify database user.}
+: ${DB_PASS?Please specify a database password.}
 
 if [ -z "$ROLLOVER_DAYS" ]; then 
     ROLLOVER_DAYS="30"
