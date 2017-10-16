@@ -22,6 +22,8 @@
 #
 # MIN_ARCHIVES      Minimum number of archives to keep regardless of age, 
 #                   defaults to 4
+#
+# PROJECT           Project name used for current backup, defaults to $DB
 
 : ${DB?Please specify a database.}
 : ${DB_HOST?Please specify a database host.}
@@ -40,6 +42,12 @@ if [ -z "$MIN_ARCHIVES" ]; then
     echo "MIN_ARCHIVES defaulted to '$MIN_ARCHIVES'"
 fi
 
+if [ -z ${PROJECT+x} ]; then
+    PROJECT=$DB
+    echo "PROJECT defaulted to '$PROJECT'"
+fi
+
+
 if [ -z ${MYSQLDUMP_OPTIONS+x} ]; then 
     MYSQLDUMP_OPTIONS="--single-transaction -v --quick --compress"
     echo "MYSQLDUMP_OPTIONS defaulted to '$MYSQLDUMP_OPTIONS'"
@@ -54,9 +62,9 @@ ARCHIVE_FILE=$ARCHIVE_DIR/${DB}_`date +$DATEFILE`.sql.gz
 /usr/bin/mysqldump -h$DB_HOST -u$DB_USER -p$DB_PASS $MYSQLDUMP_OPTIONS $DB | gzip > $ARCHIVE_FILE
 if [ ${PIPESTATUS[0]} == 0 ]
 then
-    ln -fs $ARCHIVE_FILE ${BACKUP_DIR}/${DB}.sql.gz
+    ln -fs $ARCHIVE_FILE ${BACKUP_DIR}/${PROJECT}.sql.gz
     
-    echo "Created link from ${BACKUP_DIR}/${DB}.sql.gz to $ARCHIVE_FILE"
+    echo "Created link from ${BACKUP_DIR}/${PROJECT}.sql.gz to $ARCHIVE_FILE"
     
     echo ['date'] Removing archives older than $ROLLOVER_DAYS days while keeping minimum of $MIN_ARCHIVES
     
