@@ -32,12 +32,12 @@ set +x
 : ${DB_USER?Please specify database user - DB_USER}
 : ${DB_PASS?Please specify a database password - DB_PASS}
 
-if [ -z ${ROLLOVER_DAYS+x} ]; then 
+if [ -z "$ROLLOVER_DAYS" ]; then 
     ROLLOVER_DAYS="30"
     echo "ROLLOVER_DAYS defaulted to '$ROLLOVER_DAYS'"
 fi
 
-if [ -z ${MIN_ARCHIVES+x} ]; then 
+if [ -z "$MIN_ARCHIVES" ]; then 
     MIN_ARCHIVES="4"
     echo "MIN_ARCHIVES defaulted to '$MIN_ARCHIVES'"
 fi
