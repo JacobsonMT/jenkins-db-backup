@@ -46,13 +46,10 @@ if [ -z ${MYSQLDUMP_OPTIONS+x} ]; then
 fi
 
 DATEFILE='%Y%m%d%H%M%S'
-ARCHIVE_DB_DIR=$ARCHIVE_DIR/$DB
-
-[ -e "$ARCHIVE_DB_DIR" ] || mkdir $ARCHIVE_DB_DIR
 
 echo [ `date` ] starting dump of $DB on $DB_HOST
 
-ARCHIVE_FILE=$ARCHIVE_DB_DIR/${DB}_`date +$DATEFILE`.sql.gz
+ARCHIVE_FILE=$ARCHIVE_DIR/${DB}_`date +$DATEFILE`.sql.gz
 
 /usr/bin/mysqldump -h$DB_HOST -u$DB_USER -p$DB_PASS $MYSQLDUMP_OPTIONS $DB | gzip > $ARCHIVE_FILE
 if [ ${PIPESTATUS[0]} == 0 ]
