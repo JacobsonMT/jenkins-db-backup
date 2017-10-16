@@ -23,8 +23,6 @@
 # MIN_ARCHIVES      Minimum number of archives to keep regardless of age, 
 #                   defaults to 4
 
-set +x
-
 : ${DB?Please specify a database - DB}
 : ${DB_HOST?Please specify a database host - DB_HOST}
 : ${BACKUP_DIR?Please specify a backup directory - BACKUP_DIR}
